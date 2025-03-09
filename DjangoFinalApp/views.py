@@ -9,34 +9,30 @@ def crear_tarea(request):
     if request.method == "POST":
         titulo = request.POST.get("titulo")
         descripcion = request.POST.get("descripcion")
-        estado = request.POST.get("estado", "por_realizar")  # Valor por defecto
+        estado = request.POST.get("estado", "por_realizar")
 
-        if titulo and descripcion:  # Validar campos requeridos
+        if titulo and descripcion:
             Tarea.objects.create(titulo=titulo, descripcion=descripcion, estado=estado)
             return redirect('lista_tareas')
 
     return render(request, 'crear_tarea.html')
 
-
 def editar_tarea(request, id):
     tarea = get_object_or_404(Tarea, id=id)
 
     if request.method == "POST":
-        titulo = request.POST.get("titulo")  # Obtiene el valor del formulario
-        if titulo:  # Verifica que el título no sea vacío
+        titulo = request.POST.get("titulo")
+        if titulo:
             tarea.titulo = titulo
             tarea.save()
-            return redirect("lista_tareas")  # Ajusta según tu vista de lista
+            return redirect("lista_tareas")
 
     return render(request, "editar_tarea.html", {"tarea": tarea})
-
-
-
 
 def eliminar_tarea(request, id):
     tarea = get_object_or_404(Tarea, id=id)
 
-    if request.method == "POST":  # Confirmación de eliminación
+    if request.method == "POST":
         tarea.delete()
         return redirect('lista_tareas')
 

@@ -34,6 +34,7 @@
             color: white;
             background-color: #0044cc;
             transition: background 0.3s ease;
+            max-width: 200px;
         }
         .btn:hover {
             background-color: #0033a0;
@@ -69,12 +70,42 @@
             color: #777;
             margin-top: 5px;
         }
+        .search-form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .search-form input, .search-form select {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 48%;
+        }
+        .search-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .search-actions .btn {
+            width: 48%;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Lista de Tareas</h1>
-    <a href="{% url 'crear_tarea' %}" class="btn">Crear Tarea</a>
+
+    <div class="search-actions">
+        <a href="{% url 'buscar_tareas' %}" class="btn">Buscar Tareas</a>
+        <a href="{% url 'lista_tareas' %}" class="btn" style="background-color: #00796b;">Volver a la lista completa</a>
+    </div>
+
+    <form method="get" action="{% url 'buscar_tareas' %}" class="search-form">
+        <input type="text" name="estado" placeholder="Filtrar por estado" value="{{ request.GET.estado }}">
+        <input type="date" name="fecha" placeholder="Filtrar por fecha" value="{{ request.GET.fecha }}">
+        <button type="submit" class="btn">Buscar</button>
+    </form>
 
     <section class="task-list">
         {% if tareas %}
