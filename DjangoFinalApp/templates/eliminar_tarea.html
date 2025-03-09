@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Tarea</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-delete {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+        }
+        .btn-delete:hover {
+            background-color: #b71c1c;
+        }
+        .btn-cancel {
+            background-color: #ccc;
+            color: #333;
+            border: none;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .btn-cancel:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Eliminar Tarea</h1>
+    <p>¿Estás seguro de que deseas eliminar la tarea <strong>{{ tarea.titulo }}</strong>?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn-delete">Eliminar</button>
+    </form>
+    <a href="{% url 'lista_tareas' %}" class="btn-cancel">Cancelar</a>
+</div>
+</body>
+</html>
